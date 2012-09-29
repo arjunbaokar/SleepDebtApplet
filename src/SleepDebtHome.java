@@ -1,4 +1,6 @@
+import javax.swing.JApplet;
 
-public class SleepDebtHome {
+
+public class SleepDebtHome extends JApplet {
 
 }
