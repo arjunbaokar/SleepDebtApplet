@@ -124,9 +124,9 @@ public class HomePanel extends JPanel {
 		
 		public void mouseClicked(MouseEvent e) {
 			int x = e.getX(), y = e.getY();	// Grab position of mouseclick event.
-			/*if (x >= 65 && x <= 415 && y >= 380 && y <= 530) {
+			if (x >= 55 && x <= 400 && y >= 200 && y <= 350) {
 				processClick();
-			}*/ processClick();
+			}
 			contentPanel.repaint();
 		}
 		
