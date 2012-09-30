@@ -49,7 +49,7 @@ public class Time {
 		return new Time(secondMs - firstMs);
 	}
 	
-	private static long toMilliseconds(Time time) {
+	public static long toMilliseconds(Time time) {
 		return (((time.hours * 60) + time.minutes) * 60 + time.seconds) * 1000 + time.milliseconds; 
 	}
 	

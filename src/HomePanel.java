@@ -8,13 +8,14 @@ import javax.swing.*;
 
 public class HomePanel extends JPanel {
 	private JPanel navAndTitleBar, contentPanel;
+	private Time sleepTime;
 	
 	public HomePanel() {
 		this.setLayout(null);
 		
 		navAndTitleBar = new NavBar();
 		navAndTitleBar.setBounds(0, 0, 500, 150);
-		navAndTitleBar.setBackground(Color.blue);
+		navAndTitleBar.setBackground(Color.black);
 		this.add(navAndTitleBar);
 		
 		contentPanel = new ContentPanel();
@@ -22,7 +23,7 @@ public class HomePanel extends JPanel {
 		contentPanel.setBackground(Color.blue);
 		this.add(contentPanel);
 		
-		
+		sleepTime = null;
 	}
 	
 	public void WaitForImage(JFrame component, Image image) {	// try-catch block for images
@@ -44,7 +45,7 @@ public class HomePanel extends JPanel {
 			this.setLayout(null);
 			
 			welcomeMessage = new JTextArea();
-			welcomeMessage.setBounds(20, 40, 460, 300);
+			welcomeMessage.setBounds(20, 40, 460, 100);
 			welcomeMessage.setEditable(false);
 			welcomeMessage.setForeground(Color.white);
 			welcomeMessage.setOpaque(false);
@@ -54,13 +55,16 @@ public class HomePanel extends JPanel {
 			this.add(welcomeMessage);
 		}
 		
-		@SuppressWarnings("serial")
-		class DrawingArea extends JPanel {
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				loadWelcome();
-				drawWelcomeMessage(g);
-				drawButtons(g);
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			loadWelcome();
+			drawWelcomeMessage(g);
+			
+			// Draw appropriate button.
+			if (asleep) {
+				g.drawImage(SleepDebtHome.sleepButton, 55, 200, this);
+			} else {
+				g.drawImage(SleepDebtHome.awakeButton, 55, 200, this);
 			}
 		}
 		
@@ -83,12 +87,31 @@ public class HomePanel extends JPanel {
 		private void drawWelcomeMessage(Graphics g) {
 			g.setColor(Color.white);
 			g.setFont(SleepDebtHome.HEADER_FONT);
-			g.drawString("Welcome!", 20, 10);
+			g.drawString("Welcome!", 20, 20);			
 		}
 		
-		private void drawButtons(Graphics g) {
-			Image displayedButton = asleep ? SleepDebtHome.awakeButton : SleepDebtHome.sleepButton;
-			g.drawImage(displayedButton, 20, 480, this);
+		private void processClick() {
+			// Change button to other type of button.
+			// If awake, record the system time.  If asleep, calculate sleep debt, add to map.
+			if (asleep) {
+				sleepTime = new Time(System.currentTimeMillis());
+			} else {
+				if (sleepTime != null) {
+					Time endTime = new Time(System.currentTimeMillis());
+					int elapsedTime = 0;
+					try {
+						elapsedTime = (int)(Time.toMilliseconds(Time.timeElapsed(endTime, sleepTime)));
+					} catch (Exception e) {
+						System.err.println(e);
+						System.exit(1);
+					}
+					SleepDebtHome.nightlyDebt.put(new Integer(SleepDebtHome.numEntries), new Integer(elapsedTime));
+					SleepDebtHome.numEntries++;
+				}
+			}
+			
+			// Switch to other button.
+			asleep = !asleep;
 		}
 		
 		public void mouseReleased(MouseEvent e) {
@@ -101,7 +124,9 @@ public class HomePanel extends JPanel {
 		
 		public void mouseClicked(MouseEvent e) {
 			int x = e.getX(), y = e.getY();	// Grab position of mouseclick event.
-			
+			/*if (x >= 65 && x <= 415 && y >= 380 && y <= 530) {
+				processClick();
+			}*/ processClick();
 			contentPanel.repaint();
 		}
 		
