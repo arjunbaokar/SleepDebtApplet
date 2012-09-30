@@ -13,7 +13,8 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 public class SleepDebtHome extends JFrame {
-	public static final Font HEADER_FONT, DEFAULT_FONT;
+	public static final Font HEADER_FONT = new Font("Tahoma", Font.BOLD, 20);
+	public static final Font DEFAULT_FONT = new Font("Tahoma", Font.PLAIN, 12);
 	
 	private Container contentPane;
 	private CardLayout cards;
@@ -58,15 +59,11 @@ public class SleepDebtHome extends JFrame {
 		// Data Structures
 		nightlyDebt = new HashMap<Integer, Integer>();
 		
-		// Fonts
-		HEADER_FONT = new Font("Tahoma", Font.BOLD, 20);
-		DEFAULT_FONT = new Font("Tahoma", Font.PLAIN, 12);
-		
 		// Images
-		sleepButton = Toolkit.getDefaultToolkit().getImage("sleep.png");
+		sleepButton = Toolkit.getDefaultToolkit().getImage("../images/sleep.png");
 		WaitForImage(this, sleepButton);
 		
-		awakeButton = Toolkit.getDefaultToolkit().getImage("awake.png");
+		awakeButton = Toolkit.getDefaultToolkit().getImage("../images/awake.png");
 		WaitForImage(this, awakeButton);
 	}
 	
@@ -86,8 +83,9 @@ public class SleepDebtHome extends JFrame {
 	}
 	
 	public void importFile(File dataFile) {
-		Scanner loadData = new Scanner(dataFile);
+		Scanner loadData = null;
 		try {
+			loadData = new Scanner(dataFile);
 			while (loadData.hasNext()) {
 				String[] entry = loadData.nextLine().split("\t");	// Entry 0 - Day, Entry 1 - Sleep Debt
 				nightlyDebt.put(entry[DAY_INDEX], entry[SLEEP_DEBT_INDEX]);

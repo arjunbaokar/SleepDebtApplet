@@ -24,16 +24,16 @@ public class NavBar extends JPanel implements MouseListener, MouseMotionListener
 			statsTitle = ImageIO.read( new File("INSERTIMAGENAME") );
 			logTitle = ImageIO.read( new File("INSERTIMAGENAME") );
 			settingsTitle = ImageIO.read( new File("INSERTIMAGENAME") ); */
-			butPress1 = ImageIO.read( new File("images/home_nav_button_depressed.png") );
-			butPress2 = ImageIO.read( new File("images/stats_nav_button_depressed.png") );
-			butPress3 = ImageIO.read( new File("images/sleepLog_nav_button_depressed.png") );
-			butPress4 = ImageIO.read( new File("images/settings_nav_button_depressed.png") );
-			butUnpress1 = ImageIO.read( new File("images/home_nav_button_inactive.png") );
-			butUnpress2 = ImageIO.read( new File("images/stats_nav_button_inactive.png") );
-			butUnpress3 = ImageIO.read( new File("images/sleepLog_nav_button_inactive.png") );
-			butUnpress4 = ImageIO.read( new File("images/settings_nav_button_inactive.png") );
-			dayBg = ImageIO.read( new File("images/background_day.png") );
-			nightBg = ImageIO.read( new File("images/background_night.png") );
+			butPress1 = ImageIO.read( new File("../images/home_nav_button_depressed.png") );
+			butPress2 = ImageIO.read( new File("../images/stats_nav_button_depressed.png") );
+			butPress3 = ImageIO.read( new File("../images/sleepLog_nav_button_depressed.png") );
+			butPress4 = ImageIO.read( new File("../images/settings_nav_button_depressed.png") );
+			butUnpress1 = ImageIO.read( new File("../images/home_nav_button_inactive.png") );
+			butUnpress2 = ImageIO.read( new File("../images/stats_nav_button_inactive.png") );
+			butUnpress3 = ImageIO.read( new File("../images/sleepLog_nav_button_inactive.png") );
+			butUnpress4 = ImageIO.read( new File("../images/settings_nav_button_inactive.png") );
+			dayBg = ImageIO.read( new File("../images/background_day.png") );
+			nightBg = ImageIO.read( new File("../images/background_night.png") );
 		} catch (IOException e){
 			e.printStackTrace();
 		}

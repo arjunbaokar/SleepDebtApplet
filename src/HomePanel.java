@@ -13,8 +13,8 @@ public class HomePanel extends JPanel {
 		this.setLayout(null);
 		
 		navAndTitleBar = new NavBar();
-		navBar.setBounds(0, 0, 500, 150);
-		navBar.setBackground(Color.blue);
+		navAndTitleBar.setBounds(0, 0, 500, 150);
+		navAndTitleBar.setBackground(Color.blue);
 		this.add(navAndTitleBar);
 		
 		contentPanel = new ContentPanel();
