@@ -45,7 +45,7 @@ public class HomePanel extends JPanel {
 			this.setLayout(null);
 			
 			welcomeMessage = new JTextArea();
-			welcomeMessage.setBounds(20, 40, 460, 300);
+			welcomeMessage.setBounds(20, 40, 460, 100);
 			welcomeMessage.setEditable(false);
 			welcomeMessage.setForeground(Color.white);
 			welcomeMessage.setOpaque(false);
@@ -124,9 +124,9 @@ public class HomePanel extends JPanel {
 		
 		public void mouseClicked(MouseEvent e) {
 			int x = e.getX(), y = e.getY();	// Grab position of mouseclick event.
-			if (x >= 65 && x <= 415 && y >= 380 && y <= 530) {
+			/*if (x >= 65 && x <= 415 && y >= 380 && y <= 530) {
 				processClick();
-			}
+			}*/ processClick();
 			contentPanel.repaint();
 		}
 		
