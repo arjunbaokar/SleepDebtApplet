@@ -45,6 +45,42 @@ public class NavBar extends JPanel implements MouseListener, MouseMotionListener
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
+		if (mouseClicked == false && mouseMoved == false){
+			g.drawImage(butUnpress1, 0, 0, 100, 50, null);
+			g.drawImage(butUnpress2, 100, 0, 100, 50, null);
+			g.drawImage(butUnpress3, 200, 0, 150, 50, null);
+			g.drawImage(butUnpress4, 350, 0, 150, 50, null);
+			// TODO add home title here
+		}
+		else if (mouseClicked){
+			if (yPos < 50){
+				if (xPos < 100){
+					g.drawImage(butPress1, 0, 0, 100, 50, null);
+					g.drawImage(butUnpress2, 100, 0, 100, 50, null);
+					g.drawImage(butUnpress3, 200, 0, 150, 50, null);
+					g.drawImage(butUnpress4, 350, 0, 150, 50, null);
+				}
+				else if (xPos >= 100 && yPos < 200){
+					g.drawImage(butUnpress1, 0, 0, 100, 50, null);
+					g.drawImage(butPress2, 100, 0, 100, 50, null);
+					g.drawImage(butUnpress3, 200, 0, 150, 50, null);
+					g.drawImage(butUnpress4, 350, 0, 150, 50, null);
+				}
+				else if (xPos >= 200 && yPos < 350){
+					g.drawImage(butUnpress1, 0, 0, 100, 50, null);
+					g.drawImage(butUnpress2, 100, 0, 100, 50, null);
+					g.drawImage(butPress3, 200, 0, 150, 50, null);
+					g.drawImage(butUnpress4, 350, 0, 150, 50, null);
+				}
+				else if (xPos >= 350 && xPos < 500){
+					g.drawImage(butUnpress1, 0, 0, 100, 50, null);
+					g.drawImage(butUnpress2, 100, 0, 100, 50, null);
+					g.drawImage(butUnpress3, 200, 0, 150, 50, null);
+					g.drawImage(butPress4, 350, 0, 150, 50, null);
+				}
+			}
+		}
+		
 		mouseClicked = false;
 		mouseMoved = false;
 	}
