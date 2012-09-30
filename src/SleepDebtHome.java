@@ -26,7 +26,8 @@ public class SleepDebtHome extends JFrame {
 	
 	private static File debtFile;
 	public static Image sleepButton, awakeButton;
-	private Map nightlyDebt;
+	public static Map<Integer, Integer> nightlyDebt;
+	public static int numEntries; 
 	
 	private static final int DAY_INDEX = 0;
 	private static final int SLEEP_DEBT_INDEX = 1;
@@ -68,6 +69,8 @@ public class SleepDebtHome extends JFrame {
 		
 		awakeButton = Toolkit.getDefaultToolkit().getImage("../images/awake.png");
 		WaitForImage(this, awakeButton);
+		
+		numEntries = 0;
 	}
 	
 	public static void main (String[] args) {
@@ -91,7 +94,8 @@ public class SleepDebtHome extends JFrame {
 			loadData = new Scanner(dataFile);
 			while (loadData.hasNext()) {
 				String[] entry = loadData.nextLine().split("\t");	// Entry 0 - Day, Entry 1 - Sleep Debt
-				nightlyDebt.put(entry[DAY_INDEX], entry[SLEEP_DEBT_INDEX]);
+				nightlyDebt.put(Integer.parseInt(entry[DAY_INDEX]), Integer.parseInt(entry[SLEEP_DEBT_INDEX]));
+				numEntries++;
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error: Data file cannot be found.");

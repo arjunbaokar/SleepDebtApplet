@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public class HomePanel extends JPanel {
 	private JPanel navAndTitleBar, contentPanel;
+	private Time sleepTime;
 	
 	public HomePanel() {
 		this.setLayout(null);
@@ -22,6 +23,7 @@ public class HomePanel extends JPanel {
 		contentPanel.setBackground(Color.blue);
 		this.add(contentPanel);
 		
+		sleepTime = null;
 	}
 	
 	public void WaitForImage(JFrame component, Image image) {	// try-catch block for images
@@ -91,6 +93,24 @@ public class HomePanel extends JPanel {
 		private void processClick() {
 			// Change button to other type of button.
 			// If awake, record the system time.  If asleep, calculate sleep debt, add to map.
+			if (asleep) {
+				sleepTime = new Time(System.currentTimeMillis());
+			} else {
+				if (sleepTime != null) {
+					Time endTime = new Time(System.currentTimeMillis());
+					int elapsedTime = 0;
+					try {
+						elapsedTime = (int)(Time.toMilliseconds(Time.timeElapsed(endTime, sleepTime)));
+					} catch (Exception e) {
+						System.err.println(e);
+						System.exit(1);
+					}
+					SleepDebtHome.nightlyDebt.put(new Integer(SleepDebtHome.numEntries), new Integer(elapsedTime));
+					SleepDebtHome.numEntries++;
+				}
+			}
+			
+			// Switch to other button.
 			asleep = !asleep;
 		}
 		
