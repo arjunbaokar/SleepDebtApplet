@@ -56,6 +56,8 @@ public class SleepDebtHome extends JFrame {
 		logPanel = new LogPanel();
 		this.add(logPanel, "Log");
 		
+		cards.show(homePanel, "Welcome");
+		
 		// Data Structures
 		nightlyDebt = new HashMap<Integer, Integer>();
 		
