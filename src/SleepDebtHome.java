@@ -30,6 +30,7 @@ public class SleepDebtHome extends JFrame {
 	
 	private static final int DAY_INDEX = 0;
 	private static final int SLEEP_DEBT_INDEX = 1;
+	public static final int NORMAL_SLEEP_HOURS = 8; 
 	
 	public SleepDebtHome() {
 		// JFrame Settings
@@ -56,7 +57,7 @@ public class SleepDebtHome extends JFrame {
 		logPanel = new LogPanel();
 		this.add(logPanel, "Log");
 		
-		cards.show(homePanel, "Welcome");
+		cards.show(contentPane, "Welcome");
 		
 		// Data Structures
 		nightlyDebt = new HashMap<Integer, Integer>();

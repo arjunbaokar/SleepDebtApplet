@@ -14,14 +14,13 @@ public class HomePanel extends JPanel {
 		
 		navAndTitleBar = new NavBar();
 		navAndTitleBar.setBounds(0, 0, 500, 150);
-		navAndTitleBar.setBackground(Color.blue);
+		navAndTitleBar.setBackground(Color.black);
 		this.add(navAndTitleBar);
 		
 		contentPanel = new ContentPanel();
 		contentPanel.setBounds(0, 150, 500, 650);
 		contentPanel.setBackground(Color.blue);
 		this.add(contentPanel);
-		
 		
 	}
 	
@@ -54,13 +53,16 @@ public class HomePanel extends JPanel {
 			this.add(welcomeMessage);
 		}
 		
-		@SuppressWarnings("serial")
-		class DrawingArea extends JPanel {
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				loadWelcome();
-				drawWelcomeMessage(g);
-				drawButtons(g);
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			loadWelcome();
+			drawWelcomeMessage(g);
+			
+			// Draw appropriate button.
+			if (asleep) {
+				g.drawImage(SleepDebtHome.sleepButton, 55, 200, this);
+			} else {
+				g.drawImage(SleepDebtHome.awakeButton, 55, 200, this);
 			}
 		}
 		
@@ -83,12 +85,13 @@ public class HomePanel extends JPanel {
 		private void drawWelcomeMessage(Graphics g) {
 			g.setColor(Color.white);
 			g.setFont(SleepDebtHome.HEADER_FONT);
-			g.drawString("Welcome!", 20, 10);
+			g.drawString("Welcome!", 20, 20);			
 		}
 		
-		private void drawButtons(Graphics g) {
-			Image displayedButton = asleep ? SleepDebtHome.awakeButton : SleepDebtHome.sleepButton;
-			g.drawImage(displayedButton, 20, 480, this);
+		private void processClick() {
+			// Change button to other type of button.
+			// If awake, record the system time.  If asleep, calculate sleep debt, add to map.
+			asleep = !asleep;
 		}
 		
 		public void mouseReleased(MouseEvent e) {
@@ -101,7 +104,9 @@ public class HomePanel extends JPanel {
 		
 		public void mouseClicked(MouseEvent e) {
 			int x = e.getX(), y = e.getY();	// Grab position of mouseclick event.
-			
+			if (x >= 65 && x <= 415 && y >= 380 && y <= 530) {
+				processClick();
+			}
 			contentPanel.repaint();
 		}
 		
